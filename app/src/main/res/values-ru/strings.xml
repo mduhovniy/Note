@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Блокнот</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_exit">Выход</string>
+    <string name="headerText">Header text</string>
+    <string name="textHeader">Note Header</string>
+    <string name="textNote">Note Text</string>
+    <string name="saveButton">Save Note</string>
+    <string name="sendButton">Send</string>
+    <string name="listHeader">Notes List</string>
+    <string name="backButton">Back</string>
+    <string name="delButton">Delete</string>
+</resources>
