@@ -1,6 +1,7 @@
 package info.duhovniy.maxim.note;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.LinkedList;
-
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private LinkedList<Note> mNotes;
+    private Cursor mNotes;
     /*****
      * Creating OnItemClickListener
      *****/
@@ -61,7 +60,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    public MyAdapter(LinkedList<Note> notes) {
+    public MyAdapter(Cursor notes) {
+        mNotes = notes;
+    }
+
+    public void setNotes(Cursor notes) {
         mNotes = notes;
     }
 
@@ -72,18 +75,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.row, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+
+        return new ViewHolder(inflater.inflate(R.layout.row, parent, false));
     }
 
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Note note = mNotes.get(position);
+        mNotes.moveToPosition(position);
+        Note note = new Note(mNotes.getString(1), mNotes.getString(2), mNotes.getString(3));
 
         // Set item views based on the data model
         viewHolder.headerText.setText(note.getHeader());
@@ -92,10 +95,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Button button = viewHolder.messageButton;
 
         if (note.getmEmail() != null) {
-            button.setText("Send");
+            button.setText(R.string.sendText);
             button.setEnabled(true);
         } else {
-            button.setText("Offline");
+            button.setText(R.string.offlineText);
             button.setEnabled(false);
         }
 
@@ -104,7 +107,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Return the total count of items
     @Override
     public int getItemCount() {
-        return mNotes.size();
+        return mNotes.getCount();
     }
 }
 
