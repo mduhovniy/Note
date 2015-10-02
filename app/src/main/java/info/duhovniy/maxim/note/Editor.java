@@ -31,66 +31,67 @@ public class Editor extends Activity {
 
         final Intent intent = getIntent();
 
-        if (intent.getExtras() != null) {
+        if (intent.getExtras() != null)
             mPosition = intent.getIntExtra(MainActivity.POS, -1);
-            Cursor c = mHandler.listAllNotes();
 
-            if (c.moveToPosition(mPosition)) {
-                mHeader.setText(c.getString(1));
-                mNoteText.setText(c.getString(2));
-                mEmail.setText(c.getString(3));
+        Cursor c = mHandler.listAllNotes();
+
+        if (c.moveToPosition(mPosition)) {
+            mHeader.setText(c.getString(1));
+            mNoteText.setText(c.getString(2));
+            mEmail.setText(c.getString(3));
+        }
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNote.setHeader(String.valueOf(mHeader.getText()));
+                mNote.setBody(String.valueOf(mNoteText.getText()));
+                mNote.setmEmail(String.valueOf(mEmail.getText()));
+
+                if (mPosition != -1) {
+                    Cursor c = mHandler.listAllNotes();
+                    c.moveToPosition(mPosition);
+                    mHandler.replaceNote(c.getInt(0), mNote);
+                } else {
+                    mHandler.addNote(mNote);
+                }
+
+                intent.putExtra(MainActivity.POS, mPosition);
+                setResult(RESULT_OK, intent);
+                finish();
             }
+        });
 
-            mSaveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mNote.setHeader(String.valueOf(mHeader.getText()));
-                    mNote.setBody(String.valueOf(mNoteText.getText()));
-                    mNote.setmEmail(String.valueOf(mEmail.getText()));
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-                    if (mPosition != -1) {
-                        Cursor c = mHandler.listAllNotes();
-                        c.moveToPosition(mPosition);
-                        mHandler.replaceNote(c.getInt(0), mNote);
-                    } else {
-                        mHandler.addNote(mNote);
-                    }
-
-                    intent.putExtra(MainActivity.POS, mPosition);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-            });
-
-            mBackButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-
-            mDelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        mDelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 /*
                 mNote.setHeader(String.valueOf(mHeader.getText()));
                 mNote.setBody(String.valueOf(mNoteText.getText()));
                 mNote.setmEmail(String.valueOf(mEmail.getText()));
 */
-                    if (mPosition != -1) {
-                        Cursor c = mHandler.listAllNotes();
-                        c.moveToPosition(mPosition);
-                        mHandler.delNote(c.getInt(0));
-                    }
-
-                    intent.putExtra(MainActivity.POS, mPosition);
-                    setResult(RESULT_OK, intent);
-                    finish();
+                if (mPosition != -1) {
+                    Cursor c = mHandler.listAllNotes();
+                    c.moveToPosition(mPosition);
+                    mHandler.delNote(c.getInt(0));
                 }
-            });
 
-        }
+                intent.putExtra(MainActivity.POS, mPosition);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
 
     }
+
 }
+
 
