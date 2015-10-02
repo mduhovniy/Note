@@ -1,11 +1,13 @@
 package info.duhovniy.maxim.note;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -19,6 +21,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // for any view that will be set as you render a row
         public TextView headerText, noteText;
         public Button messageButton;
+        public LinearLayout mLayout;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -30,6 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             this.headerText = (TextView) itemView.findViewById(R.id.note_header);
             this.noteText = (TextView) itemView.findViewById(R.id.note_text);
             this.messageButton = (Button) itemView.findViewById(R.id.message_button);
+            this.mLayout = (LinearLayout) itemView.findViewById(R.id.row_line);
 
 /*            // Setup the click listener
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +84,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (note.getmEmail() != null && !note.getmEmail().equals("")) {
             button.setText(R.string.sendText);
             button.setEnabled(true);
+            viewHolder.mLayout.setBackgroundColor(Color.BLUE);
         } else {
             button.setText(R.string.offlineText);
             button.setEnabled(false);
+            viewHolder.mLayout.setBackgroundColor(Color.WHITE);
         }
 
     }
