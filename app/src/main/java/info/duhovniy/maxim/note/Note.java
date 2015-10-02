@@ -1,11 +1,9 @@
 package info.duhovniy.maxim.note;
 
-import java.io.Serializable;
-
 /**
  * Created by maxduhovniy on 9/5/15.
  */
-public class Note implements Serializable {
+public class Note {
 
     private String mHeader;
     private String mBody;
@@ -15,36 +13,34 @@ public class Note implements Serializable {
 
     }
 
+    public Note(String header, String body, String email) {
+        this.mHeader = header;
+        this.mBody = body;
+        this.mEmail = email;
+    }
+
     public String getmEmail() {
         return mEmail;
     }
 
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setmEmail(String email) {
+        this.mEmail = email;
     }
 
     public String getHeader() {
         return mHeader;
     }
 
-    public void setHeader(String mHeader) {
-        this.mHeader = mHeader;
+    public void setHeader(String header) {
+        this.mHeader = header;
     }
 
     public String getBody() {
         return mBody;
     }
 
-    public void setBody(String mBody) {
-        this.mBody = mBody;
+    public void setBody(String body) {
+        this.mBody = body;
     }
 
-    @Override
-    public String toString() {
-        if(mBody.length() > 30) {
-            return mHeader + "\n" + mBody.substring(0, 30) + " ...";
-        } else {
-            return mHeader + "\n" + mBody;
-        }
-    }
 }

@@ -1,6 +1,5 @@
 package info.duhovniy.maxim.note;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,22 +11,6 @@ import android.widget.TextView;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private Cursor mNotes;
-    /*****
-     * Creating OnItemClickListener
-     *****/
-
-    // Define listener member variable
-    private OnItemClickListener listener;
-
-    // Define the listener interface
-    public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
-    }
-
-    // Define the method that allows the parent activity or fragment to define the listener
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
-    }
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
@@ -48,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             this.noteText = (TextView) itemView.findViewById(R.id.note_text);
             this.messageButton = (Button) itemView.findViewById(R.id.message_button);
 
-            // Setup the click listener
+/*            // Setup the click listener
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -56,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     if (listener != null)
                         listener.onItemClick(itemView, getLayoutPosition());
                 }
-            });
+            });*/
         }
     }
 
@@ -71,8 +54,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Usually involves inflating a layout from XML and returning the holder
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         // Inflate the custom layout
 
@@ -94,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         Button button = viewHolder.messageButton;
 
-        if (note.getmEmail() != null) {
+        if (note.getmEmail() != null && !note.getmEmail().equals("")) {
             button.setText(R.string.sendText);
             button.setEnabled(true);
         } else {

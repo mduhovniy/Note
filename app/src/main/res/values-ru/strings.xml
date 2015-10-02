@@ -10,4 +10,10 @@
     <string name="listHeader">Notes List</string>
     <string name="backButton">Back</string>
     <string name="delButton">Delete</string>
+    <string name="navigation_subheader">Create Note</string>
+    <string name="navigation_item_1">New note</string>
+    <string name="navigation_item_2">Clear base</string>
+    <string name="textEmail">Email</string>
+    <string name="sendText">Send</string>
+    <string name="offlineText">Offline</string>
 </resources>
