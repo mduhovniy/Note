@@ -19,11 +19,11 @@
             android:layout_height="@dimen/abc_action_bar_default_height_material"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-             />
-<!--
-            android:theme="@style/AppTheme.Toolbar"
-            app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
--->
+            />
+        <!--
+                    android:theme="@style/AppTheme.Toolbar"
+                    app:titleTextAppearance="@style/AppTheme.Toolbar.Title" />
+        -->
 
         <!-- Real content goes here -->
         <TextView
@@ -66,9 +66,9 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer" />
-<!--
-        android:background="@color/ternary"
-        app:itemIconTint="@color/drawer_item_text"
-        app:itemTextColor="@color/drawer_item_text"-->
+    <!--
+            android:background="@color/ternary"
+            app:itemIconTint="@color/drawer_item_text"
+            app:itemTextColor="@color/drawer_item_text"-->
 
 </android.support.v4.widget.DrawerLayout>

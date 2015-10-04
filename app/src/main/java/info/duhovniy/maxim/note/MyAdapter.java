@@ -79,15 +79,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.headerText.setText(note.getHeader());
         viewHolder.noteText.setText(note.getBody());
 
-        Button button = viewHolder.messageButton;
-
         if (note.getmEmail() != null && !note.getmEmail().equals("")) {
-            button.setText(R.string.sendText);
-            button.setEnabled(true);
+            viewHolder.messageButton.setText(R.string.sendText);
+            viewHolder.messageButton.setEnabled(true);
             viewHolder.mLayout.setBackgroundColor(Color.BLUE);
         } else {
-            button.setText(R.string.offlineText);
-            button.setEnabled(false);
+            viewHolder.messageButton.setText(R.string.offlineText);
+            viewHolder.messageButton.setEnabled(false);
             viewHolder.mLayout.setBackgroundColor(Color.WHITE);
         }
 
